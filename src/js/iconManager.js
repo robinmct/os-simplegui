@@ -5,6 +5,7 @@ class IconManagerClass {
         this.selectedIcons = new Set();
         this.isDragging = false;
         this.isSelecting = false;
+        this.suppressClearClick = false;
         this.dragStartX = 0;
         this.dragStartY = 0;
         this.lastMouseX = 0;
@@ -404,6 +405,11 @@ class IconManagerClass {
         
         // Click on empty desktop to clear selection
         desktop.addEventListener('click', (e) => {
+            // If a drag selection just occurred, skip clearing on the synthetic click
+            if (this.suppressClearClick) {
+                this.suppressClearClick = false;
+                return;
+            }
             if (e.target === desktop) {
                 this.clearSelection();
             }
@@ -456,6 +462,7 @@ class IconManagerClass {
 
     startDragSelection(e) {
         this.isSelecting = true;
+        this.suppressClearClick = true;
         this.selectionStart = {
             x: e.clientX,
             y: e.clientY
@@ -499,6 +506,9 @@ class IconManagerClass {
             
             document.removeEventListener('mousemove', mouseMoveHandler);
             document.removeEventListener('mouseup', mouseUpHandler);
+            // Prevent the trailing click event from clearing the selection
+            // Reset suppression on next tick so subsequent clicks behave normally
+            setTimeout(() => { this.suppressClearClick = false; }, 0);
         };
         
         document.addEventListener('mousemove', mouseMoveHandler);
