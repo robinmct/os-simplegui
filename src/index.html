@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <title>Desktop OS Simulator</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Desktop Area -->
+    <div id="desktop" class="desktop">
+        <!-- Desktop icons will be positioned absolutely -->
+        <!-- App icons with default positions -->
+    </div>
+
+    <!-- Selection Rectangle for Drag-Select -->
+    <div id="selectionRectangle" class="selection-rectangle"></div>
+
+    <!-- Context Menu -->
+    <div id="contextMenu" class="context-menu hidden">
+        <div class="context-menu-item" data-action="new">
+            <span>➕</span> New
+            <!-- Submenu for New -->
+            <div id="newSubmenu" class="context-submenu hidden">
+                <div class="context-menu-item" data-action="newFolder">
+                    <span>📁</span> Folder
+                </div>
+                <div class="context-menu-item" data-action="newNote">
+                    <span>📝</span> Note
+                </div>
+            </div>
+        </div>
+        <div class="context-menu-item" data-action="refresh">
+            <span>🔄</span> Refresh
+        </div>
+        <div class="context-menu-item" data-action="changeWallpaper">
+            <span>🖼️</span> Change Wallpaper
+        </div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" data-action="renameSelected">
+            <span>✏️</span> Rename Selected
+        </div>
+        <div class="context-menu-item" data-action="deleteSelected">
+            <span>🗑️</span> Delete Selected
+        </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div id="taskbar" class="taskbar">
+        <div class="taskbar-left">
+            <div class="start-menu-btn">
+                <span>🖥️</span>
+            </div>
+            <div id="taskbarApps" class="taskbar-apps"></div>
+        </div>
+        <div class="taskbar-right">
+            <div id="clock" class="clock"></div>
+        </div>
+    </div>
+
+    <!-- Start Menu -->
+    <div id="startMenu" class="start-menu hidden">
+        <div class="start-menu-header">Desktop OS</div>
+        <div class="start-menu-items">
+            <button class="start-item" data-app="calculator">🔢 Calculator</button>
+            <button class="start-item" data-app="notes">📝 Notes</button>
+            <button class="start-item" data-app="explorer">📂 Explorer</button>
+            <button class="start-item" data-app="settings">⚙️ Settings</button>
+            <button class="start-item" data-app="about">ℹ️ About</button>
+        </div>
+    </div>
+
+    <!-- Window Container -->
+    <div id="windowContainer"></div>
+
+    <!-- Load Scripts -->
+    <script src="js/ui.js"></script>
+    <script src="js/fileSystem.js"></script>
+    <script src="js/iconManager.js"></script>
+    <script src="js/apps/Calculator.js"></script>
+    <script src="js/apps/Settings.js"></script>
+    <script src="js/apps/Notes.js"></script>
+    <script src="js/apps/Explorer.js"></script>
+    <script src="js/apps/About.js"></script>
+    <script src="js/windowManager.js"></script>
+    <script src="js/contextMenu.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
